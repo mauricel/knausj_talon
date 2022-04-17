@@ -283,6 +283,11 @@ class Actions:
                 raise RuntimeError(f"Can't focus window: {window.title}")
             actions.sleep(0.1)
 
+    def launch_visual_studio():
+        """Launches visual studio because I can't be bothered doing this properly"""
+        ui.launch(
+            path='C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\devenv.exe')
+
     def switcher_launch(path: str):
         """Launch a new application by path (all OSes), or AppUserModel_ID path on Windows"""
         if app.platform != "windows":
