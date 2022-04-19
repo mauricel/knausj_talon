@@ -15,6 +15,14 @@ dub arrow: "=>"
 new line: "\\n"
 carriage return: "\\r"
 line feed: "\\r\\n"
+pareny:
+    insert("()")
+squarey:
+    insert("[]")
+bracey:
+    insert("{}")
+angley:
+    insert("<>")
 empty dubstring:
     '""'
     key(left)

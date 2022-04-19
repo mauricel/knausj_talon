@@ -1,15 +1,67 @@
 from talon import Context, Module, actions, settings
 
+mod = Module()
 ctx = Context()
 ctx.matches = r"""
 tag: user.csharp
 """
+
 ctx.lists["user.code_common_function"] = {
     "integer": "int.TryParse",
     "print": "Console.WriteLine",
     "string": ".ToString",
 }
 
+csharp_built_in_type_keywords = {
+    "bool": "bool",
+    "byte": "byte",
+    "sbyte": "sbyte",
+    "char": "char",
+    "decimal": "decimal",
+    "double": "double",
+    "float": "float",
+    "int": "int",
+    "uint": "uint",
+    "nint": "nint",
+    "nuint": "nuint",
+    "long": "long",
+    "ulong": "ulong",
+    "short": "short",
+    "ushort": "ushort",
+    "object": "object",
+    "string": "string",
+    "dynamic": "dynamic",
+    "var": "var",
+    "void": "void",
+    "event": "event"
+}
+
+# register with generic talon language keywords
+ctx.lists["user.code_type"] = csharp_built_in_type_keywords
+
+csharp_modifier = {
+    "public": "public",
+    "internal": "internal",
+    "protected": "protected",
+    "private": "private",
+    "abstract": "abstract",
+    "const": "const",
+    "extern": "extern",
+    "override": "override",
+    "partial": "partial",
+    "readonly": "readonly",
+    "sealed": "sealed",
+    "static": "static",
+    "unsafe": "unsafe",
+    "virtual": "virtual",
+    "volatile": "volatile",
+    "async": "async",
+    "new": "new",
+
+}
+
+mod.list("csharp_modifier", desc="Csharp Modifiers")
+ctx.lists["self.csharp_modifier"] = csharp_modifier
 
 @ctx.action_class("user")
 class UserActions:
