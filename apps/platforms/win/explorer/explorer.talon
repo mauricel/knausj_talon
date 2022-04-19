@@ -5,3 +5,5 @@ tag(): user.file_manager
 ^go <user.letter>$: user.file_manager_open_volume("{letter}:")
 go app data: user.file_manager_open_directory("%AppData%")
 go program files: user.file_manager_open_directory("%programfiles%")
+go source: user.file_manager_open_directory("%userprofile%\\source")
+go repo: user.file_manager_open_directory("%userprofile%\\source\\repos")
