@@ -24,3 +24,10 @@ settings():
     user.code_private_variable_formatter = "PRIVATE_CAMEL_CASE"
     user.code_protected_variable_formatter = "PUBLIC_CAMEL_CASE"
     user.code_public_variable_formatter = "PUBLIC_CAMEL_CASE"
+
+op new:
+    insert("new ")
+
+[state] {user.csharp_modifier}:
+    insert(user.csharp_modifier + " ")
+
