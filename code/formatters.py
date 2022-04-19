@@ -38,7 +38,8 @@ def format_phrase(m: Union[str, Phrase], formatters: str):
             m.words = m.words[:-1]
         words = actions.dictate.replace_words(actions.dictate.parse_words(m))
 
-    result = last_phrase_formatted = format_phrase_without_adding_to_history(words, formatters)
+    result = last_phrase_formatted = format_phrase_without_adding_to_history(
+        words, formatters)
     actions.user.add_phrase_to_history(result)
     # Arguably, we shouldn't be dealing with history here, but somewhere later
     # down the line. But we have a bunch of code that relies on doing it this
@@ -137,7 +138,8 @@ formatters_words = {
     "slasher": formatters_dict["SLASH_SEPARATED"],
     "smash": formatters_dict["NO_SPACES"],
     "snake": formatters_dict["SNAKE_CASE"],
-    "string": formatters_dict["SINGLE_QUOTED_STRING"],
+    # renamed from 'string' because it made it difficult to specify a string type in c#
+    "onestring": formatters_dict["SINGLE_QUOTED_STRING"],
     "title": formatters_dict["CAPITALIZE_ALL_WORDS"],
 }
 
@@ -212,8 +214,6 @@ class Actions:
         """Inserts a phrase formatted according to formatters. Formatters is a comma separated list of formatters (e.g. 'CAPITALIZE_ALL_WORDS,DOUBLE_QUOTED_STRING')"""
         actions.insert(format_phrase(phrase, formatters))
 
-
-
     def formatters_reformat_last(formatters: str) -> str:
         """Clears and reformats last formatted phrase"""
         global last_phrase, last_phrase_formatted
@@ -245,8 +245,9 @@ class Actions:
         """returns a list of words currently used as formatters, and a demonstration string using those formatters"""
         formatters_help_demo = {}
         for name in sorted(set(formatters_words.keys())):
-            formatters_help_demo[name] = format_phrase_without_adding_to_history(['one', 'two', 'three'], name)
-        return  formatters_help_demo
+            formatters_help_demo[name] = format_phrase_without_adding_to_history(
+                ['one', 'two', 'three'], name)
+        return formatters_help_demo
 
     def reformat_text(text: str, formatters: str) -> str:
         """Reformat the text."""
@@ -258,12 +259,14 @@ class Actions:
         for string in strings:
             actions.insert(string)
 
+
 def unformat_text(text: str) -> str:
     """Remove format from text"""
     unformatted = re.sub(r"[^\w]+", " ", text)
     # Split on camelCase, including numbers
     # FIXME: handle non-ASCII letters!
-    unformatted = re.sub(r"(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|(?<=[a-zA-Z])(?=[0-9])|(?<=[0-9])(?=[a-zA-Z])", " ", unformatted)
+    unformatted = re.sub(
+        r"(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|(?<=[a-zA-Z])(?=[0-9])|(?<=[0-9])(?=[a-zA-Z])", " ", unformatted)
     # TODO: Separate out studleycase vars
     return unformatted.lower()
 
