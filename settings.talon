@@ -22,7 +22,7 @@ settings():
     user.mouse_enable_pop_click = 1
 
     # When enabled, the 'Scroll Mouse' GUI will not be shown.
-    user.mouse_hide_mouse_gui = 0
+    user.mouse_hide_mouse_gui = 1
 
     # Hide cursor when mouse_wake is called to enable zoom mouse
     user.mouse_wake_hides_cursor = 0
@@ -51,4 +51,4 @@ settings():
     # user.context_sensitive_dictation = 1
 
 # Uncomment this to enable the curse yes/curse no commands (show hide mouse cursor). See issue #688.
-# tag(): user.mouse_cursor_commands_enable
+tag(): user.mouse_cursor_commands_enable
