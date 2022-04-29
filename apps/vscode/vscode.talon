@@ -108,13 +108,13 @@ go next mark: user.vscode("bookmarks.jumpToNext")
 go last mark: user.vscode("bookmarks.jumpToPrevious")
 
 # Folding
-fold that: user.vscode("editor.fold")
-unfold that: user.vscode("editor.unfold")
-fold those: user.vscode("editor.foldAllMarkerRegions")
-unfold those: user.vscode("editor.unfoldRecursively")
-fold all: user.vscode("editor.foldAll")
-unfold all: user.vscode("editor.unfoldAll")
-fold comments: user.vscode("editor.foldAllBlockComments")
+# fold that: user.vscode("editor.fold")
+# unfold that: user.vscode("editor.unfold")
+# fold those: user.vscode("editor.foldAllMarkerRegions")
+# unfold those: user.vscode("editor.unfoldRecursively")
+# fold all: user.vscode("editor.foldAll")
+# unfold all: user.vscode("editor.unfoldAll")
+# fold comments: user.vscode("editor.foldAllBlockComments")
 
 # Git / Github (not using verb-noun-adjective pattern, mirroring terminal commands.)
 git branch: user.vscode("git.branchFrom")
@@ -209,3 +209,10 @@ cell run above: user.vscode("jupyter.runallcellsabove.palette")
 cell run: user.vscode("jupyter.runcurrentcell")
 
 install local: user.vscode("workbench.extensions.action.installVSIX")
+
+# personal customizations
+view right: user.vscode("workbench.action.moveEditorToRightGroup")
+format all caps: user.vscode("editor.action.transformToUppercase")
+format all down: user.vscode("editor.action.transformToLowercase")
+format snake: user.vscode("editor.action.transformToSnakecase")
+format title: user.vscode("editor.action.transformToTitlecase")
