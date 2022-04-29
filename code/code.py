@@ -19,7 +19,7 @@ language_extensions = {
     # 'elm': 'elm',
     'gdb': 'gdb',
     'go': 'go',
-    # 'html': 'html',
+    'xml': 'xml html htm',
     'java': 'java',
     'javascript': 'js',
     'javascriptreact': 'jsx',
