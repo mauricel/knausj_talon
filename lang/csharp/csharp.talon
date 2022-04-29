@@ -18,7 +18,7 @@ tag(): user.code_operators_math
 tag(): user.code_operators_pointer
 
 settings():
-    user.code_private_function_formatter = "PRIVATE_CAMEL_CASE"
+    user.code_private_function_formatter = "PUBLIC_CAMEL_CASE"
     user.code_protected_function_formatter = "PUBLIC_CAMEL_CASE"
     user.code_public_function_formatter = "PUBLIC_CAMEL_CASE"
     user.code_private_variable_formatter = "PRIVATE_CAMEL_CASE"
@@ -28,6 +28,20 @@ settings():
 op new:
     insert("new ")
 
+state interface:
+    insert("interface ")
+
 [state] {user.csharp_modifier}:
     insert(user.csharp_modifier + " ")
 
+as property: 
+    insert(" {{ get; }}")
+
+as public property:
+    insert(" {{ get; set; }}")
+
+as private property:
+    insert(" {{ get; private set; }}")
+
+generic [type] {user.csharp_generic_data_structure}:
+    user.insert_between(csharp_generic_data_structure + "<", ">")

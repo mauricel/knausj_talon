@@ -12,6 +12,12 @@ ctx.lists["user.code_common_function"] = {
     "string": ".ToString",
 }
 
+# ctx.lists["self.csharp_types"] = {
+#     "int": "int",
+#     "var": "var",
+# }
+
+# mod.list("csharp_types", desc="Common stdint C types")
 csharp_built_in_type_keywords = {
     "bool": "bool",
     "byte": "byte",
@@ -36,8 +42,6 @@ csharp_built_in_type_keywords = {
     "event": "event"
 }
 
-# register with generic talon language keywords
-ctx.lists["user.code_type"] = csharp_built_in_type_keywords
 
 csharp_modifier = {
     "public": "public",
@@ -62,6 +66,30 @@ csharp_modifier = {
 
 mod.list("csharp_modifier", desc="Csharp Modifiers")
 ctx.lists["self.csharp_modifier"] = csharp_modifier
+
+csharp_generic_data_structure = {
+    "ienumerable": "IEnumerable",
+    "iqueryable": "IQueryable",
+    "list": "List",
+    "dictionary": "Dictionary",
+    "set": "Set",
+    "stack": "Stack",
+}
+
+mod.list("csharp_generic_data_structure", desc="C# Generic Data Structures")
+ctx.lists["self.csharp_generic_data_structure"] = csharp_generic_data_structure
+
+
+# register with generic talon language keywords that respond to "type {}"
+csharp_types = csharp_built_in_type_keywords.copy()
+csharp_types.update(csharp_generic_data_structure)
+ctx.lists["user.code_type"] = csharp_types
+
+# @mod.capture(rule="{self.csharp_types}")
+# def csharp_types(m) -> str:
+#     "Returns a string"
+#     return m.csharp_types
+
 
 @ctx.action_class("user")
 class UserActions:
