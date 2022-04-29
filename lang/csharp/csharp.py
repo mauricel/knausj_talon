@@ -12,6 +12,12 @@ ctx.lists["user.code_common_function"] = {
     "string": ".ToString",
 }
 
+# ctx.lists["self.csharp_types"] = {
+#     "int": "int",
+#     "var": "var",
+# }
+
+# mod.list("csharp_types", desc="Common stdint C types")
 csharp_built_in_type_keywords = {
     "bool": "bool",
     "byte": "byte",
@@ -36,8 +42,6 @@ csharp_built_in_type_keywords = {
     "event": "event"
 }
 
-# register with generic talon language keywords
-ctx.lists["user.code_type"] = csharp_built_in_type_keywords
 
 csharp_modifier = {
     "public": "public",
@@ -63,14 +67,40 @@ csharp_modifier = {
 mod.list("csharp_modifier", desc="Csharp Modifiers")
 ctx.lists["self.csharp_modifier"] = csharp_modifier
 
+csharp_generic_data_structure = {
+    "ienumerable": "IEnumerable",
+    "iqueryable": "IQueryable",
+    "list": "List",
+    "dictionary": "Dictionary",
+    "set": "Set",
+    "stack": "Stack",
+}
+
+mod.list("csharp_generic_data_structure", desc="C# Generic Data Structures")
+ctx.lists["self.csharp_generic_data_structure"] = csharp_generic_data_structure
+
+
+# register with generic talon language keywords that respond to "type {}"
+csharp_types = csharp_built_in_type_keywords.copy()
+csharp_types.update(csharp_generic_data_structure)
+ctx.lists["user.code_type"] = csharp_types
+
+# @mod.capture(rule="{self.csharp_types}")
+# def csharp_types(m) -> str:
+#     "Returns a string"
+#     return m.csharp_types
+
+
 @ctx.action_class("user")
 class UserActions:
     def code_operator_indirection():           actions.auto_insert('*')
     def code_operator_address_of():            actions.auto_insert('&')
     def code_operator_structure_dereference(): actions.auto_insert('->')
     def code_operator_lambda():                actions.auto_insert('=>')
+
     def code_operator_subscript():
         actions.user.insert_between('[', ']')
+
     def code_operator_assignment():                      actions.auto_insert(' = ')
     def code_operator_subtraction():                     actions.auto_insert(' - ')
     def code_operator_subtraction_assignment():          actions.auto_insert(' -= ')
@@ -78,7 +108,7 @@ class UserActions:
     def code_operator_addition_assignment():             actions.auto_insert(' += ')
     def code_operator_multiplication():                  actions.auto_insert(' * ')
     def code_operator_multiplication_assignment():       actions.auto_insert(' *= ')
-    #action(user.code_operator_exponent): " ** "
+    # action(user.code_operator_exponent): " ** "
     def code_operator_division():                        actions.auto_insert(' / ')
     def code_operator_division_assignment():             actions.auto_insert(' /= ')
     def code_operator_modulo():                          actions.auto_insert(' % ')
@@ -101,6 +131,7 @@ class UserActions:
     def code_operator_bitwise_left_shift_assignment():   actions.auto_insert(' <<= ')
     def code_operator_bitwise_right_shift():             actions.auto_insert(' >> ')
     def code_operator_bitwise_right_shift_assignment():  actions.auto_insert(' >>= ')
+
     def code_block():
         actions.insert('{}')
         actions.key('left enter enter up tab')
@@ -114,28 +145,38 @@ class UserActions:
     def code_insert_null():        actions.auto_insert('null')
     def code_insert_is_null():     actions.auto_insert(' == null ')
     def code_insert_is_not_null(): actions.auto_insert(' != null')
+
     def code_state_if():
         actions.user.insert_between('if(', ')')
+
     def code_state_else_if():
         actions.user.insert_between('else if(', ')')
+
     def code_state_else():
         actions.insert('else\n{\n}\n')
         actions.key('up')
+
     def code_state_switch():
         actions.user.insert_between('switch(', ')')
+
     def code_state_case():
         actions.insert('case \nbreak;')
         actions.edit.up()
+
     def code_state_for(): actions.auto_insert('for ')
+
     def code_state_for_each():
         actions.insert('foreach() ')
         actions.key('left')
         actions.edit.word_left()
         actions.key('space')
         actions.edit.left()
+
     def code_state_go_to(): actions.auto_insert('go to ')
+
     def code_state_while():
         actions.user.insert_between('while(', ')')
+
     def code_state_return():   actions.auto_insert('return ')
     def code_break():          actions.auto_insert('break;')
     def code_next():           actions.auto_insert('continue;')
@@ -144,6 +185,7 @@ class UserActions:
     def code_define_class():     actions.auto_insert('class ')
     def code_import():         actions.auto_insert('using  ')
     def code_comment_line_prefix():        actions.auto_insert('//')
+
     def code_insert_function(text: str, selection: str):
         text += f"({selection or ''})"
         actions.user.paste(text)
