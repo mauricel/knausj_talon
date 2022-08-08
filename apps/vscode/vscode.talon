@@ -253,3 +253,10 @@ cell run: user.vscode("notebook.cell.execute")
 
 install local: user.vscode("workbench.extensions.action.installVSIX")
 preview markdown: user.vscode("markdown.showPreview")
+
+# personal customizations
+view right: user.vscode("workbench.action.moveEditorToRightGroup")
+format all caps: user.vscode("editor.action.transformToUppercase")
+format all down: user.vscode("editor.action.transformToLowercase")
+format snake: user.vscode("editor.action.transformToSnakecase")
+format title: user.vscode("editor.action.transformToTitlecase")
