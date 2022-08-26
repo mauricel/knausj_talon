@@ -136,6 +136,7 @@ formatters_dict = {
 
 # This is the mapping from spoken phrases to formatters
 formatters_words = {
+    "all caps": formatters_dict["ALL_CAPS"],
     "all cap": formatters_dict["ALL_CAPS"],
     "all down": formatters_dict["ALL_LOWERCASE"],
     "camel": formatters_dict["PRIVATE_CAMEL_CASE"],
@@ -152,6 +153,7 @@ formatters_words = {
     # renamed from 'string' because it made it difficult to specify a string type in c#
     "onestring": formatters_dict["SINGLE_QUOTED_STRING"],
     "title": formatters_dict["CAPITALIZE_ALL_WORDS"],
+    "sentence": formatters_dict["CAPITALIZE_FIRST_WORD"],
 }
 
 all_formatters = {}
