@@ -36,3 +36,12 @@ state module: "module "
 ^instance <user.text>$:
     insert("@")
     user.code_public_variable_formatter(text)
+
+op (arrow|point): " => "
+
+(sim|symbol) <user.text>: 
+    insert(":")
+    insert(text)
+
+var <user.text>:
+    insert(text)
