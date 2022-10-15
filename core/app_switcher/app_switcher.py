@@ -296,10 +296,10 @@ class Actions:
 
     def switcher_menu():
         """Open a menu of running apps to switch to"""
-        if app.platform == "windows":
-            actions.key("alt-ctrl-tab")
-        else:
-            print("Persistent Switcher Menu not supported on " + app.platform)
+        # if app.platform == "windows":
+        actions.key("alt-ctrl-tab") #  assumes alt-tab is installed and configured with the correct key binding
+        # else:
+        # print("Persistent Switcher Menu not supported on " + app.platform)
 
     def switcher_toggle_running():
         """Shows/hides all running applications"""
